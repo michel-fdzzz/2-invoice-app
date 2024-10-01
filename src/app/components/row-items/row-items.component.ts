@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Item } from '../../models/item';
 
 @Component({
-  selector: 'app-row-items',
+  selector: 'tr[row-item]',
   standalone: true,
   imports: [],
   templateUrl: './row-items.component.html'
 })
 export class RowItemsComponent {
-
+  @Input() item!: Item;
 }
