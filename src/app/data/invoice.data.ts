@@ -1,7 +1,8 @@
 import { Invoice } from "../models/invoice";
 
 //Exportamos los datos de la fastura que vienen de la clase Invoice de invoice.ts
-export const invoiceData: Invoice = {
+//Se pone any para que no de error en el nuevo att total ya que en este JSON no está
+export const invoiceData: /*Invoice*/ any = {
     id: 1,
     name: 'COmponentes de PC',
     client: {

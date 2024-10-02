@@ -15,6 +15,20 @@ export class InvoiceService {
    * @returns Datos de la factura
    */
   getInvoice(): Invoice {
-    return this.invoice;
+    const total = this.calculateTotal();
+    // Se poenen los 3 puntos porque si quiero copiar los datos del this y modificarlos tengo 
+    // que hacer eso ya que voy a modificar total 
+    return { ... this.invoice, total: total };
+  }
+
+  calculateTotal() {
+    /*let total = 0;
+    this.invoice.items.forEach(item => {
+      total += (item.price * item.quantity);
+    });
+    return total;*/
+    // Hace lo mismo que el anterior pero con reduce(), también se puede hacer con string.
+    // reduce() es una función de array que recibe un array y un callback y devuelve un solo valor
+    return this.invoice.items.reduce((total, item) => total + (item.price * item.quantity), 0);
   }
 }
