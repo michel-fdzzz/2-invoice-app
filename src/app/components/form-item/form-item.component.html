@@ -1,6 +1,63 @@
-<form class="w-50" (ngSubmit)="onSubmit()">
-    <input name="product" placerholder="Producto" class="form-control m-3" [(ngModel)]="item.product" />
-    <input name="price" placerholder="Precio" class="form-control m-3" [(ngModel)]="item.price" />
-    <input name="quantity" placerholder="Cantidad" class="form-control m-3" [(ngModel)]="item.quantity" />
-    <button class="btn btn-primary m-3">Nuevo Item</button>
+<form class="w-50" (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm">
+
+    <input name="product" placeholder="Producto" class="form-control m-3" [(ngModel)]="item.product" required
+        minlength="5" #product="ngModel" />
+    <div>
+        @if (product.invalid && product.dirty || product.touched){
+        @if (product.errors!['required']){
+        <div class="text-danger m-3">
+            Nombre del producto es requerido!
+        </div>
+        }
+
+        @if (product.errors!['minlength']){
+        <div class="text-danger m-3">
+            El nomre del producto debe tener al menos 5 caracteres!
+        </div>
+        }
+
+        }
+    </div>
+
+    <input name="price" type="number" placeholder="Precio" class="form-control m-3" [(ngModel)]="item.price" required
+        min="10" #price="ngModel" />
+    <div>
+        @if (price.invalid && price.dirty || price.touched){
+        @if (price.errors && price.errors!['required']){
+        <div class="text-danger m-3">
+            El precio es requerido!
+        </div>
+        }
+
+        @if (price.errors!['min']){
+        <div class="text-danger m-3">
+            No se cumple el precio minimo!
+        </div>
+        }
+
+        }
+    </div>
+
+    <input name="quantity" type="number" placeholder="Cantidad" class="form-control m-3" [(ngModel)]="item.quantity"
+        required min="1" #quantity="ngModel" />
+
+    <div>
+        @if (quantity.invalid && quantity.dirty || quantity.touched){
+        @if (quantity.errors && quantity.errors!['required']){
+        <div class="text-danger m-3">
+            La cantidad es requerido!
+        </div>
+        }
+
+        @if (quantity.errors!['min']){
+        <div class="text-danger m-3">
+            No se cumple el numero minimo!
+        </div>
+        }
+
+        }
+    </div>
+    <button class="btn btn-primary m-3" [disabled]="itemForm.invalid">
+        Nuevo Item
+    </button>
 </form>
