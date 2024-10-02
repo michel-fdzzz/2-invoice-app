@@ -11,9 +11,22 @@ export class FormItemComponent {
   @Output() addItemEventEmitter = new EventEmitter();
 
   private counterId = 4;
+
   item: any = {
     product: '',
     price: '',
     quantity: ''
+  }
+
+  onSubmit(): void {
+    this.addItemEventEmitter.emit({ id: this.counterId, ... this.item });
+    this.counterId++;
+
+    // Limpia el formmulario
+    this.item = {
+      product: '',
+      price: '',
+      quantity: ''
+    }
   }
 }
