@@ -29,7 +29,12 @@ export class InvoiceComponent implements OnInit {
   }
 
   removeItem(id: number) {
-    //@filter si ese item (item.id) es diferente al id que recibimos se asigna ese id al item
+    /**@filter crea un nuevo array si se cumple el filtro con los elementos que lo cumplan
+     * En este caso al darle a remove va a crear el array con los 
+     * elementos que tengan id diferente del seleccionado por lo 
+     * que si seleccionamos el msimo id se borra ya que no cumple el 
+     * filtro de que tengan un id diferente al que viene por parametro
+    */
     this.invoice.items = this.invoice.items.filter(item => item.id != id)
   }
 }
